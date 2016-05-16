@@ -31,4 +31,6 @@ public abstract class State {
 
     public abstract void render(Graphics g);
 
+    public abstract void createUIManager();
+
 }

@@ -42,6 +42,12 @@ public class MenuState extends State {
         }));
     }
 
+    //TODO: method was created for GameState class. Use this method properly in current class
+    @Override
+    public void createUIManager() {
+
+    }
+
     @Override
     public void tick() {
         uiManager.tick();
@@ -49,6 +55,7 @@ public class MenuState extends State {
 
     @Override
     public void render(Graphics g) {
+        g.drawImage(Assets.menuBackground, 0, 0, null);
         uiManager.render(g);
     }
 }

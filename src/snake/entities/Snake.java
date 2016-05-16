@@ -54,6 +54,7 @@ public class Snake extends Entity {
             yCoor = 20;*/
             dead = true;
             //TODO: make game reset possible instead of this "return;"s
+            handler.getState().createUIManager();
             return;
         }
 
@@ -63,6 +64,7 @@ public class Snake extends Entity {
             xCoor = 20;
             yCoor = 20;*/
             dead = true;
+            handler.getState().createUIManager();
             return;
         }
 
@@ -73,6 +75,7 @@ public class Snake extends Entity {
                 xCoor = 20;
                 yCoor = 20;*/
                 dead = true;
+                handler.getState().createUIManager();
                 return;
             }
         }

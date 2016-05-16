@@ -66,6 +66,7 @@ public class Game implements Runnable {
     }
 
     private void tick() {
+        //TODO: fix bug! snake can turn 180* and hit itself because manager ticks more often than snake
         keyManager.tick();
 
 

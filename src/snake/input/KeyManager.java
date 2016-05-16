@@ -64,6 +64,11 @@ public class KeyManager implements KeyListener {
         keys[KeyEvent.VK_UP] = false;
     }
 
+    public void resetSnakeControlls() {
+        clearLeftAndRight();
+        clearUpAndDown();
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 

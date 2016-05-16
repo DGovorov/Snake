@@ -2,7 +2,10 @@ package snake.gfx;
 
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +19,8 @@ public class Assets {
     private static final int MENU_BUTTON_WIDTH = 171;
     private static final int MENU_BUTTON_HEIGHT = 57;
 
+    public static BufferedImage menuBackground;
+
     public static BufferedImage dirt;
     public static BufferedImage grass;
     public static BufferedImage stone;
@@ -23,14 +28,10 @@ public class Assets {
     public static BufferedImage snakeBall;
 
     public static Map<Boolean, BufferedImage> menuButtonStart;
-    //public static BufferedImage menuButtonStart;
-    //public static BufferedImage menuButtonStartHovered;
     public static Map<Boolean, BufferedImage> menuButtonOptions;
-    //public static BufferedImage menuButtonOptions;
-    //public static BufferedImage menuButtonOptionsHovered;
     public static Map<Boolean, BufferedImage> menuButtonQuit;
-    //public static BufferedImage menuButtonQuit;
-    //public static BufferedImage menuButtonQuitHovered;
+    public static Map<Boolean, BufferedImage> gameButtonRestart;
+    public static Map<Boolean, BufferedImage> gameButtonMenu;
 
     public static void init() {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
@@ -44,19 +45,20 @@ public class Assets {
         menuButtonStart = new HashMap<>();
         menuButtonStart.put(false, sheet.crop(0,0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         menuButtonStart.put(true, sheet.crop(0, MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
-        //menuButtonStart = sheet.crop(0,0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
-        //menuButtonStartHovered = sheet.crop(0, MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
         menuButtonOptions = new HashMap<>();
-        menuButtonOptions.put(false, sheet.crop(0, MENU_BUTTON_HEIGHT * 3, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
-        menuButtonOptions.put(true, sheet.crop(0, MENU_BUTTON_HEIGHT * 2, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
-        //menuButtonOptions = sheet.crop(0, MENU_BUTTON_HEIGHT * 2, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
-        //menuButtonOptionsHovered = sheet.crop(0, MENU_BUTTON_HEIGHT * 3, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
+        menuButtonOptions.put(false, sheet.crop(0, MENU_BUTTON_HEIGHT * 2, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        menuButtonOptions.put(true, sheet.crop(0, MENU_BUTTON_HEIGHT * 3, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         menuButtonQuit = new HashMap<>();
         menuButtonQuit.put(false, sheet.crop(0, MENU_BUTTON_HEIGHT * 4, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         menuButtonQuit.put(true, sheet.crop(0, MENU_BUTTON_HEIGHT * 5, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
-        //menuButtonQuit = sheet.crop(0, MENU_BUTTON_HEIGHT * 4, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
-        //menuButtonQuitHovered = sheet.crop(0, MENU_BUTTON_HEIGHT * 5, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT);
+        gameButtonRestart = new HashMap<>();
+        gameButtonRestart.put(false, sheet.crop(172, 0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        gameButtonRestart.put(true, sheet.crop(172, MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        gameButtonMenu = new HashMap<>();
+        gameButtonMenu.put(false, sheet.crop(172, MENU_BUTTON_HEIGHT * 2, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        gameButtonMenu.put(true, sheet.crop(172, MENU_BUTTON_HEIGHT * 3, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
 
+        menuBackground = ImageLoader.loadImage("/textures/menuBackground.png");
     }
 
 }

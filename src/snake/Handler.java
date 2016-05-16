@@ -4,6 +4,8 @@ import snake.entities.Apple;
 import snake.entities.Snake;
 import snake.input.KeyManager;
 import snake.input.MouseManager;
+import snake.states.GameState;
+import snake.states.State;
 import snake.tiles.Tile;
 import snake.worlds.World;
 
@@ -53,6 +55,11 @@ public class Handler {
 
     public Game getGame() {
         return game;
+    }
+
+    //TODO: find more elegant way to work with gameState from Snake class
+    public State getState() {
+        return State.getState();
     }
 
     public void setSnake(Snake snake) {
