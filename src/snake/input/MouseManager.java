@@ -58,7 +58,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
             rightPressed = false;
         }
 
-        if (uiManager != null){
+        if (uiManager != null) {
             uiManager.onMouseRelease(e);
         }
     }
@@ -68,7 +68,7 @@ public class MouseManager implements MouseListener, MouseMotionListener {
         mouseX = e.getX();
         mouseY = e.getY();
 
-        if (uiManager != null){
+        if (uiManager != null) {
             uiManager.onMouseMove(e);
         }
     }

@@ -29,7 +29,7 @@ public abstract class UIObject {
 
     public abstract void onClick();
 
-    public void onMouseMove(MouseEvent e){
+    public void onMouseMove(MouseEvent e) {
         hovering = bounds.contains(e.getX(), e.getY());
     }
 

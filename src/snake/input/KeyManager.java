@@ -2,7 +2,6 @@ package snake.input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Arrays;
 
 /**
  * Created by Dim on 05.05.2016.
@@ -32,19 +31,19 @@ public class KeyManager implements KeyListener {
     public void keyPressed(KeyEvent e) {
 
         int keyCode = e.getKeyCode();
-        if ((keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) && !left){
+        if ((keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) && !left) {
             clearUpAndDown();
             keys[keyCode] = true;
         }
-        if ((keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) && !right){
+        if ((keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) && !right) {
             clearUpAndDown();
             keys[keyCode] = true;
         }
-        if ((keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) && !up){
+        if ((keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) && !up) {
             clearLeftAndRight();
             keys[keyCode] = true;
         }
-        if ((keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_U) && !down){
+        if ((keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_U) && !down) {
             clearLeftAndRight();
             keys[keyCode] = true;
         }

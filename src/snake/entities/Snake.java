@@ -2,8 +2,6 @@ package snake.entities;
 
 import snake.Handler;
 import snake.input.KeyManager;
-import snake.states.GameState;
-import snake.states.State;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,14 +15,14 @@ public class Snake extends Entity {
     private List<BodyPart> snake;
     private int size;
     private boolean dead;
-    private int speed = 2;
+    private int speed = 0;
     private int tick;
 
     public Snake(Handler handler, int xCoor, int yCoor) {
         super(handler, xCoor, yCoor);
         snake = new ArrayList<>();
         snake.add(new BodyPart(handler, xCoor, yCoor));
-        this.size = 1;
+        this.size = 0;
     }
 
     public Snake(Handler handler, int xCoor, int yCoor, int size) {
@@ -33,7 +31,7 @@ public class Snake extends Entity {
     }
 
     public void tick() {
-        if (tick < speed){
+        if (tick < speed) {
             tick++;
             return;
         } else {
@@ -59,7 +57,7 @@ public class Snake extends Entity {
         }
 
         //hit stone tile check
-        if (handler.getTile(xCoor/20, yCoor/20).isSolid()) {
+        if (handler.getTile(xCoor / 20, yCoor / 20).isSolid()) {
             /*State.setState(new GameState(handler));
             xCoor = 20;
             yCoor = 20;*/
@@ -70,7 +68,7 @@ public class Snake extends Entity {
 
         //hit self check
         for (int i = 0; i < snake.size() - 3; i++) {
-            if (xCoor == snake.get(i).getxCoor() && yCoor == snake.get(i).getyCoor()){
+            if (xCoor == snake.get(i).getxCoor() && yCoor == snake.get(i).getyCoor()) {
                 /*State.setState(new GameState(handler));
                 xCoor = 20;
                 yCoor = 20;*/
@@ -81,7 +79,7 @@ public class Snake extends Entity {
         }
 
         //ate apple check
-        if (handler.getApple().xCoor == xCoor && handler.getApple().yCoor == yCoor){
+        if (handler.getApple().xCoor == xCoor && handler.getApple().yCoor == yCoor) {
             handler.getApple().respawn();
             size++;
         }

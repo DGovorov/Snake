@@ -19,7 +19,7 @@ public abstract class Tile {
     protected BufferedImage texture;
     protected final int id;
 
-    public Tile(BufferedImage texture, int id){
+    public Tile(BufferedImage texture, int id) {
         this.texture = texture;
         this.id = id;
 

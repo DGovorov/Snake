@@ -1,8 +1,6 @@
 package snake.worlds;
 
-import snake.Game;
 import snake.Handler;
-import snake.gfx.Assets;
 import snake.tiles.DirtTile;
 import snake.tiles.Tile;
 import snake.utils.Utils;
@@ -35,10 +33,10 @@ public class World {
     public void render(Graphics g) {
         //TODO: limits can be used to increase rendering efficiency, if using "following camera" mode
 
-        for (int y = 0; y < height; y++){
-            for (int x = 0; x < width; x++){
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
                 //TODO: here can be implemented "following camera" view
-                getTile(x,y).render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
+                getTile(x, y).render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGHT);
             }
         }
 

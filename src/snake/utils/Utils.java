@@ -13,19 +13,19 @@ public class Utils {
 
         StringBuilder builder = new StringBuilder();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(path))){
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line;
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 builder.append(line).append("\n");
             }
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         return builder.toString();
     }
 
-    public static int parseInt(String number){
+    public static int parseInt(String number) {
         return Integer.parseInt(number);
     }
 

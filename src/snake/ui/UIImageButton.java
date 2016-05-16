@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by Dim on 15.05.2016.
  */
-public class UIImageButton extends UIObject{
+public class UIImageButton extends UIObject {
 
     private Map<Boolean, BufferedImage> images;
     private ClickListener clicker;
@@ -25,7 +25,7 @@ public class UIImageButton extends UIObject{
 
     @Override
     public void render(Graphics g) {
-        if (hovering){
+        if (hovering) {
             g.drawImage(images.get(true), x, y, null);
         } else {
             g.drawImage(images.get(false), x, y, null);

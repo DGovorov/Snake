@@ -1,11 +1,6 @@
 package snake.gfx;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,16 +29,18 @@ public class Assets {
     public static Map<Boolean, BufferedImage> gameButtonMenu;
 
     public static void init() {
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
-        dirt = sheet.crop(0, 0, TILE_WIDTH, TILE_HEIGHT);
-        grass = sheet.crop(TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
-        stone = sheet.crop(TILE_WIDTH * 2, 0, TILE_WIDTH, TILE_HEIGHT);
-        apple = sheet.crop(0, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-        snakeBall = sheet.crop(TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        cropTiles();
 
+        cropButtons();
+
+        menuBackground = ImageLoader.loadImage("/textures/menuBackground.png");
+    }
+
+    private static void cropButtons() {
+        SpriteSheet sheet;
         sheet = new SpriteSheet(ImageLoader.loadImage("/textures/gamebuttons.png"));
         menuButtonStart = new HashMap<>();
-        menuButtonStart.put(false, sheet.crop(0,0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        menuButtonStart.put(false, sheet.crop(0, 0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         menuButtonStart.put(true, sheet.crop(0, MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         menuButtonOptions = new HashMap<>();
         menuButtonOptions.put(false, sheet.crop(0, MENU_BUTTON_HEIGHT * 2, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
@@ -57,8 +54,15 @@ public class Assets {
         gameButtonMenu = new HashMap<>();
         gameButtonMenu.put(false, sheet.crop(172, MENU_BUTTON_HEIGHT * 2, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         gameButtonMenu.put(true, sheet.crop(172, MENU_BUTTON_HEIGHT * 3, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+    }
 
-        menuBackground = ImageLoader.loadImage("/textures/menuBackground.png");
+    private static void cropTiles() {
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
+        dirt = sheet.crop(0, 0, TILE_WIDTH, TILE_HEIGHT);
+        grass = sheet.crop(TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
+        stone = sheet.crop(TILE_WIDTH * 2, 0, TILE_WIDTH, TILE_HEIGHT);
+        apple = sheet.crop(0, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        snakeBall = sheet.crop(TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
     }
 
 }

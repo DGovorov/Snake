@@ -14,14 +14,14 @@ public class Display {
     private int width;
     private int height;
 
-    public Display (String title, int width, int height) {
+    public Display(String title, int width, int height) {
         this.width = width;
         this.height = height;
 
         createDisplay(title);
     }
 
-    private void createDisplay(String title){
+    private void createDisplay(String title) {
         frame = new JFrame(title);
         frame.setSize(width, height);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

@@ -4,7 +4,6 @@ import snake.entities.Apple;
 import snake.entities.Snake;
 import snake.input.KeyManager;
 import snake.input.MouseManager;
-import snake.states.GameState;
 import snake.states.State;
 import snake.tiles.Tile;
 import snake.worlds.World;

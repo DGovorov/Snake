@@ -5,6 +5,6 @@ package snake;
  */
 public class Launcher {
     public static void main(String[] args) {
-        new Game("SnakeTeam Game v0.4", 640, 360).start();
+        new Game("Snake Game v0.7.0", 640, 360).start();
     }
 }

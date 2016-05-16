@@ -23,7 +23,7 @@ public class Game implements Runnable {
     private String title;
 
     private Thread thread;
-    private boolean running = false;
+    public boolean running = false;
 
     private BufferStrategy bs;
     private Graphics g;
@@ -35,7 +35,7 @@ public class Game implements Runnable {
     public State gameState;
     public State menuState;
 
-    private int fps = 30;
+    private int fps = 9;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -118,6 +118,7 @@ public class Game implements Runnable {
             }
 
             if (timer >= 1_000_000_000) {
+                //TODO: remove this SysOut
                 System.out.println("Ticks and Frames: " + ticks);
                 ticks = 0;
                 timer = 0;

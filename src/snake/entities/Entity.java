@@ -1,6 +1,5 @@
 package snake.entities;
 
-import snake.Game;
 import snake.Handler;
 
 import java.awt.*;

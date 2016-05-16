@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Dim on 06.05.2016.
  */
-public class Apple extends Entity{
+public class Apple extends Entity {
 
     //TODO add constructor without x|y paratemers
     public Apple(Handler handler, int xCoor, int yCoor) {
@@ -19,18 +19,18 @@ public class Apple extends Entity{
 
     public void respawn() {
         Random r = new Random();
-        xCoor = r.nextInt(handler.getWidth()/20) * 20;
-        yCoor = r.nextInt(handler.getHeight()/20) * 20;
+        xCoor = r.nextInt(handler.getWidth() / 20) * 20;
+        yCoor = r.nextInt(handler.getHeight() / 20) * 20;
 
         //spawned in Solid check
-        if (handler.getTile(xCoor/20, yCoor/20).isSolid()){
+        if (handler.getTile(xCoor / 20, yCoor / 20).isSolid()) {
             respawn();
         }
 
         //spawned in Snake check
         List<BodyPart> snakeParts = handler.getSnake().getParts();
         for (BodyPart part : snakeParts) {
-            if (xCoor == part.getxCoor() && yCoor == part.getyCoor()){
+            if (xCoor == part.getxCoor() && yCoor == part.getyCoor()) {
                 respawn();
             }
         }

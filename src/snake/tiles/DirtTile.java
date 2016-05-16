@@ -2,8 +2,6 @@ package snake.tiles;
 
 import snake.gfx.Assets;
 
-import java.awt.image.BufferedImage;
-
 /**
  * Created by Dim on 14.05.2016.
  */
