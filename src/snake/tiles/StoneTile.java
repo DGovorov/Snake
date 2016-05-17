@@ -11,10 +11,6 @@ public class StoneTile extends Tile {
         super(Assets.stone, 2);
     }
 
-    /*public StoneTile(BufferedImage texture, int id) {
-        super(Assets.stone, id);
-    }*/
-
     @Override
     public boolean isSolid() {
         return true;

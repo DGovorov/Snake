@@ -11,10 +11,6 @@ public class GrassTile extends Tile {
         super(Assets.grass, 1);
     }
 
-    /*public GrassTile(BufferedImage texture, int id) {
-        super(Assets.grass, id);
-    }*/
-
     @Override
     public boolean isSolid() {
         return false;

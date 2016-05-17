@@ -32,6 +32,7 @@ public class Game implements Runnable {
     private MouseManager mouseManager;
     private Handler handler;
 
+    private State currentState;
     public State gameState;
     public State menuState;
 
@@ -60,18 +61,20 @@ public class Game implements Runnable {
 
         gameState = new GameState(handler);
         menuState = new MenuState(handler);
-        State.setState(menuState);
+        setCurrentState(menuState);
 
 
     }
 
     private void tick() {
-        //TODO: fix bug! snake can turn 180* and hit itself because manager ticks more often than snake
+        /*TODO: fix bug! snake can turn 180* and hit itself
+          TODO: because manager ticks more often than snake
+          TODO: when using snake.speed */
         keyManager.tick();
 
 
-        if (State.getState() != null) {
-            State.getState().tick();
+        if (getCurrentState() != null) {
+            getCurrentState().tick();
         }
     }
 
@@ -85,8 +88,8 @@ public class Game implements Runnable {
         g = bs.getDrawGraphics();
         g.clearRect(0, 0, width, height);
 
-        if (State.getState() != null) {
-            State.getState().render(g);
+        if (getCurrentState() != null) {
+            getCurrentState().render(g);
         }
 
         bs.show();
@@ -160,6 +163,14 @@ public class Game implements Runnable {
 
     public int getHeight() {
         return height;
+    }
+
+    public State getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(State currentState) {
+        this.currentState = currentState;
     }
 
     public KeyManager getKeyManager() {

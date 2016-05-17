@@ -57,8 +57,10 @@ public class Handler {
     }
 
     //TODO: find more elegant way to work with gameState from Snake class
+    public  void setState(State state) {game.setCurrentState(state);}
+
     public State getState() {
-        return State.getState();
+        return game.getCurrentState();
     }
 
     public void setSnake(Snake snake) {

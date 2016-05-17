@@ -11,10 +11,6 @@ public class DirtTile extends Tile {
         super(Assets.dirt, 0);
     }
 
-    /*public DirtTile(BufferedImage texture, int id) {
-        super(Assets.dirt, id);
-    }*/
-
     @Override
     public boolean isSolid() {
         return false;

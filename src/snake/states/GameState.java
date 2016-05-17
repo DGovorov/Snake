@@ -58,7 +58,7 @@ public class GameState extends State {
                 uiManager = null;
                 init(handler);
                 handler.getKeyManager().resetSnakeControlls();
-                State.setState(new MenuState(handler));
+                handler.setState(new MenuState(handler));
             }
         }));
     }
