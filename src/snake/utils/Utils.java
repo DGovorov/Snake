@@ -1,8 +1,7 @@
 package snake.utils;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.util.List;
 
 /**
  * Created by Dim on 14.05.2016.
@@ -23,6 +22,20 @@ public class Utils {
         }
 
         return builder.toString();
+    }
+
+    public static void saveStringToFile(List<String> world, String fileName){
+        String path = "res/worlds/" + fileName + ".txt";
+        //TODO: make fileExistsCheck()
+        File file = new File(path);
+        try (Writer writer = new FileWriter(file, true)){
+            for (String string : world) {
+                writer.write(string);
+                writer.write("\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static int parseInt(String number) {

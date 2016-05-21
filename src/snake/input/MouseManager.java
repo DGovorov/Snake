@@ -75,7 +75,13 @@ public class MouseManager implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-
+        mouseX = e.getX();
+        mouseY = e.getY();
+        if (e.getButton() == MouseEvent.BUTTON1) {
+            leftPressed = true;
+        } else if (e.getButton() == MouseEvent.BUTTON3) {
+            rightPressed = true;
+        }
     }
 
     @Override

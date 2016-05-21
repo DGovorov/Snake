@@ -1,6 +1,7 @@
 package snake.states;
 
 import snake.Handler;
+import snake.editor.WorldEditor;
 import snake.gfx.Assets;
 import snake.ui.ClickListener;
 import snake.ui.UIImageButton;
@@ -30,7 +31,8 @@ public class MenuState extends State {
         uiManager.add(new UIImageButton(234, 180 + 57, 171, 57, Assets.menuButtonOptions, new ClickListener() {
             @Override
             public void onClick() {
-
+                handler.getMouseManager().setUIManager(null);
+                handler.setState(new EditorState(handler));
             }
         }));
 

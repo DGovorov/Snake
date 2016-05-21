@@ -30,6 +30,7 @@ public class KeyManager implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        //TODO: nullify all the directions except just one and move and move "choosing" logic to Snake class
         int keyCode = e.getKeyCode();
         if ((keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) && !left) {
             clearUpAndDown();
@@ -43,7 +44,7 @@ public class KeyManager implements KeyListener {
             clearLeftAndRight();
             keys[keyCode] = true;
         }
-        if ((keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_U) && !down) {
+        if ((keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) && !down) {
             clearLeftAndRight();
             keys[keyCode] = true;
         }

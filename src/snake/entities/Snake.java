@@ -2,6 +2,8 @@ package snake.entities;
 
 import snake.Handler;
 import snake.input.KeyManager;
+import snake.states.GameState;
+import snake.worlds.World;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -41,6 +43,13 @@ public class Snake extends Entity {
         if (dead) {
             return;
         }
+
+        //TODO: levelComplete and levelChange logic
+        /*if (size >= 10){
+            dead = true;
+            handler.getGameState().levelCompleteUI();
+            return;
+        }*/
 
         getInput();
         BodyPart snakeHead = new BodyPart(handler, xCoor, yCoor);
