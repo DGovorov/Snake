@@ -26,6 +26,8 @@ public class EditorState extends State {
     private UIManager uiManager;
     private String fileName;
     private JTextField fileNameInputField;
+    private int baseWidth;
+    private int baseHeight;
 
     public EditorState(Handler handler) {
         super(handler);
@@ -36,20 +38,21 @@ public class EditorState extends State {
         //terribly resizing window to add palette and stuff
         Canvas canvas = handler.getDisplay().getCanvas();
         Dimension dimension = canvas.getMaximumSize();
-        int width = (int) dimension.getWidth();
-        int height = (int) dimension.getHeight();
-        canvas.setMaximumSize(new Dimension(width, height + 120));
+        baseWidth = (int) dimension.getWidth();
+        baseHeight = (int) dimension.getHeight();
+        canvas.setMaximumSize(new Dimension(baseWidth, baseHeight + 120));
         //yeah, and frame too
         JFrame frame = handler.getDisplay().getFrame();
-        frame.resize(width, height + 140);
+        frame.resize(baseWidth, baseHeight + 140);
 
         //adding text field to frame
         fileNameInputField = new JTextField(10);
         fileNameInputField.setSize(50, 15);
-        fileNameInputField.setLocation(width/2, height + 40);
+        fileNameInputField.setLocation(baseWidth/2, baseHeight + 40);
         fileNameInputField.setPreferredSize(new Dimension(50, 15));
         fileNameInputField.setMaximumSize(new Dimension(50, 15));
         fileNameInputField.setMinimumSize(new Dimension(50, 15));
+        fileNameInputField.setText("INPUT FILE NAME HERE!!!");
         fileNameInputField.setVisible(true);
         frame.add(fileNameInputField, BorderLayout.SOUTH);
     }
@@ -67,6 +70,10 @@ public class EditorState extends State {
         worldEditor.render(g);
 
         g.drawImage(Assets.tilePalette, 0, 360, 250, 100, null);
+        //TODO: rework following showing brush workaround
+        Tile tile = worldEditor.getBrush();
+        tile.render(g, 220, 405);
+
 
         if (uiManager != null) {
             uiManager.render(g);
@@ -77,7 +84,7 @@ public class EditorState extends State {
     public void createUIManager() {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
-        uiManager.add(new UIImageButton(460, 385, 171, 57, Assets.gameButtonMenu, new ClickListener() {
+        uiManager.add(new UIImageButton(289, 385, 171, 57, Assets.editorButtonSave, new ClickListener() {
             @Override
             public void onClick() {
                 String nameInput = fileNameInputField.getText();
@@ -90,8 +97,23 @@ public class EditorState extends State {
             }
         }));
 
+        uiManager.add(new UIImageButton(460, 385, 171, 57, Assets.gameButtonMenu, new ClickListener() {
+            @Override
+            public void onClick() {
+                //TODO: rework this prototype of switching window size!
+                handler.getMouseManager().setUIManager(null);
+                handler.setState(new MenuState(handler));
+                handler.getDisplay().getCanvas().setMaximumSize(new Dimension(baseWidth, baseHeight));
+                handler.getDisplay().getCanvas().setMinimumSize(new Dimension(baseWidth, baseHeight));
+                handler.getDisplay().getFrame().remove(fileNameInputField);
+                handler.getDisplay().getFrame().setMaximumSize(new Dimension(baseWidth, baseHeight));
+                handler.getDisplay().getFrame().setMinimumSize(new Dimension(baseWidth, baseHeight));
+                handler.getDisplay().getFrame().pack();
+            }
+        }));
+
         int tileStarterX = 10;
-        int tileStarterY = 381;
+        int tileStarterY = 382;
         int step = 3;
         Map<Boolean, BufferedImage> dirtButton = new HashMap<>();
         dirtButton.put(true, Assets.dirt);

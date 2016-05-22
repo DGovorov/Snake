@@ -30,6 +30,7 @@ public class Assets {
     public static Map<Boolean, BufferedImage> menuButtonQuit;
     public static Map<Boolean, BufferedImage> gameButtonRestart;
     public static Map<Boolean, BufferedImage> gameButtonMenu;
+    public static Map<Boolean, BufferedImage> editorButtonSave;
 
     public static BufferedImage tilePalette;
 
@@ -46,7 +47,7 @@ public class Assets {
 
     private static void cropButtons() {
         SpriteSheet sheet;
-        sheet = new SpriteSheet(ImageLoader.loadImage("/textures/gamebuttons.png"));
+        sheet = new SpriteSheet(ImageLoader.loadImage("/textures/gameButtons.png"));
         menuButtonStart = new HashMap<>();
         menuButtonStart.put(false, sheet.crop(0, 0, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         menuButtonStart.put(true, sheet.crop(0, MENU_BUTTON_HEIGHT, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
@@ -62,6 +63,9 @@ public class Assets {
         gameButtonMenu = new HashMap<>();
         gameButtonMenu.put(false, sheet.crop(172, MENU_BUTTON_HEIGHT * 2, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         gameButtonMenu.put(true, sheet.crop(172, MENU_BUTTON_HEIGHT * 3, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        editorButtonSave = new HashMap<>();
+        editorButtonSave.put(false, sheet.crop(172, MENU_BUTTON_HEIGHT * 4, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        editorButtonSave.put(true, sheet.crop(172, MENU_BUTTON_HEIGHT * 5, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
     }
 
     private static void cropMainSheet() {

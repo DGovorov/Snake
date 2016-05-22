@@ -13,6 +13,6 @@ public class MossStoneTile extends Tile {
 
     @Override
     public boolean isSolid() {
-        return false;
+        return true;
     }
 }

@@ -40,8 +40,9 @@ public class WorldEditor {
             Arrays.fill(row, 1);
         }
 
-        xSpawn = 6;
-        ySpawn = 7;
+        //TODO: using real coords since tileSize still isn't a field in Game class
+        xSpawn = 340;
+        ySpawn = 140;
     }
 
     public void setBrush(Tile tile) {
@@ -50,6 +51,10 @@ public class WorldEditor {
         } else {
             brush = tile;
         }
+    }
+
+    public Tile getBrush() {
+        return brush;
     }
 
     public void drawTile() {
@@ -95,8 +100,9 @@ public class WorldEditor {
 
     public List<String> worldToText() {
         List<String> world = new ArrayList<>();
-        world.add(width + " " + height);
-        world.add(xSpawn + " " + ySpawn);
+        //TODO: think about how to remove the last +" " in strings, workaround
+        world.add(width + " " + height + " ");
+        world.add(xSpawn + " " + ySpawn + " ");
 
         for (int y = 0; y < height; y++) {
             StringBuilder builder = new StringBuilder();
