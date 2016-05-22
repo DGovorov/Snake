@@ -1,5 +1,6 @@
 package snake;
 
+import snake.display.Display;
 import snake.entities.Apple;
 import snake.entities.Snake;
 import snake.input.KeyManager;
@@ -101,5 +102,9 @@ public class Handler {
 
     public void setySpawn(int ySpawn) {
         this.ySpawn = ySpawn;
+    }
+
+    public Display getDisplay() {
+        return game.getDisplay();
     }
 }

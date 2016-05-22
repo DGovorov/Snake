@@ -19,6 +19,9 @@ public class Assets {
     public static BufferedImage dirt;
     public static BufferedImage grass;
     public static BufferedImage stone;
+    public static BufferedImage sand;
+    public static BufferedImage water;
+    public static BufferedImage mossStone;
     public static BufferedImage apple;
     public static BufferedImage snakeBall;
 
@@ -28,10 +31,15 @@ public class Assets {
     public static Map<Boolean, BufferedImage> gameButtonRestart;
     public static Map<Boolean, BufferedImage> gameButtonMenu;
 
+    public static BufferedImage tilePalette;
+
     public static void init() {
-        cropTiles();
+        cropMainSheet();
 
         cropButtons();
+
+        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/tilePalette.png"));
+        tilePalette = sheet.crop(0, 0, 250, 100);
 
         menuBackground = ImageLoader.loadImage("/textures/menuBackground.png");
     }
@@ -56,11 +64,15 @@ public class Assets {
         gameButtonMenu.put(true, sheet.crop(172, MENU_BUTTON_HEIGHT * 3, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
     }
 
-    private static void cropTiles() {
+    private static void cropMainSheet() {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
         dirt = sheet.crop(0, 0, TILE_WIDTH, TILE_HEIGHT);
         grass = sheet.crop(TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
         stone = sheet.crop(TILE_WIDTH * 2, 0, TILE_WIDTH, TILE_HEIGHT);
+        sand = sheet.crop(TILE_WIDTH * 3, 0, TILE_WIDTH, TILE_HEIGHT);
+        water = sheet.crop(TILE_WIDTH * 4, 0, TILE_WIDTH, TILE_HEIGHT);
+        mossStone = sheet.crop(TILE_WIDTH * 5, 0, TILE_WIDTH, TILE_HEIGHT);
+
         apple = sheet.crop(0, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
         snakeBall = sheet.crop(TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
     }

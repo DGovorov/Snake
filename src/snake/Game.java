@@ -182,4 +182,8 @@ public class Game implements Runnable {
         return mouseManager;
     }
 
+    public Display getDisplay() {
+        return display;
+    }
+
 }
