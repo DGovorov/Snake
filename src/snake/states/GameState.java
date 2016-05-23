@@ -9,7 +9,8 @@ import snake.ui.UIImageButton;
 import snake.ui.UIManager;
 import snake.worlds.World;
 
-import java.awt.*;
+import java.awt.Graphics;
+
 
 /**
  * Created by Dim on 15.05.2016.
@@ -20,22 +21,28 @@ public class GameState extends State {
     private Snake snake;
     private Apple apple;
     private UIManager uiManager;
+    private int currentWorld;
+    //TODO: worldPath method
+    //TODO: !currentWorld is always 1 because levelComplete creates new GameState!
 
     public GameState(Handler handler) {
         super(handler);
+        currentWorld = 1;
         init(handler);
     }
 
-    public GameState(Handler handler, World world) {
+    public GameState(Handler handler, int worldNumber) {
         this(handler);
+        currentWorld = worldNumber;
         init(handler);
         if (world != null) {
-            this.world = world;
+            handler.setWorld(world);
         }
     }
 
     private void init(Handler handler) {
-        world = new World(handler, "res/worlds/world1.txt");
+        String worldPath = getWorldPath(currentWorld);
+        world = new World(handler, worldPath);
         snake = new Snake(handler, handler.getxSpawn(), handler.getySpawn(), 3);
         apple = new Apple(handler, 80, 80);
 
@@ -45,8 +52,22 @@ public class GameState extends State {
         apple.respawn();
     }
 
+    private String getWorldPath(int currentWorld) {
+        return "res/worlds/world" + currentWorld + ".txt";
+    }
+
     @Override
     public void createUIManager() {
+
+        //TODO: !!! REMOVE && currentWorld != 5. workaround just to avoid fail on loading not existing file.
+        if (snake.isVictorious() && currentWorld != 5) {
+            levelCompleteUI();
+        } else {
+            levelFailedUI();
+        }
+    }
+
+    private void levelFailedUI() {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
         uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.gameButtonRestart, new ClickListener() {
@@ -71,27 +92,24 @@ public class GameState extends State {
         }));
     }
 
-    //TODO: changeLevel logic
-    private int count = 0;
-
-    public void levelCompleteUI() {
-        if(count != 0){
-            System.out.println("here!");
-        }
-        count++;
+    private void levelCompleteUI() {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
         uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.menuButtonStart, new ClickListener() {
             @Override
             public void onClick() {
+                currentWorld++;
                 handler.getMouseManager().setUIManager(null);
                 uiManager = null;
                 init(handler);
                 handler.getKeyManager().resetSnakeControlls();
-                handler.setState(new GameState(handler, new World(handler, "res/worlds/world2.txt")));
+                String worldPath = getWorldPath(currentWorld);
+                handler.setState(new GameState(handler, currentWorld));
             }
         }));
     }
+
+    //TODO: changeLevel logic
 
     @Override
     public void tick() {
@@ -109,6 +127,8 @@ public class GameState extends State {
         apple.render(g);
         if (uiManager != null) {
             uiManager.render(g);
+        } else {
+            System.out.println("null");
         }
     }
 

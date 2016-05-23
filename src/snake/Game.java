@@ -33,11 +33,11 @@ public class Game implements Runnable {
     private Handler handler;
 
     private State currentState;
-    public State gameState;
+    public GameState gameState;
     public State menuState;
 
     //TODO: keep this at 30fps after snake.speed logic is done
-    private int fps = 10;
+    private int fps = 8;
 
     public Game(String title, int width, int height) {
         this.width = width;

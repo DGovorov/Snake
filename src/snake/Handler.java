@@ -61,7 +61,7 @@ public class Handler {
     public  void setState(State state) {game.setCurrentState(state);}
 
     public GameState getGameState(){
-        return (GameState) game.gameState;
+        return game.gameState;
     }
 
     public State getState() {

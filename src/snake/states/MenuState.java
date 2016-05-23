@@ -1,7 +1,6 @@
 package snake.states;
 
 import snake.Handler;
-import snake.editor.WorldEditor;
 import snake.gfx.Assets;
 import snake.ui.ClickListener;
 import snake.ui.UIImageButton;

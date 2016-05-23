@@ -2,8 +2,6 @@ package snake.entities;
 
 import snake.Handler;
 import snake.input.KeyManager;
-import snake.states.GameState;
-import snake.worlds.World;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,6 +15,7 @@ public class Snake extends Entity {
     private List<BodyPart> snake;
     private int size;
     private boolean dead;
+    private boolean victorious;
     private int speed = 0;
     private int tick;
 
@@ -33,6 +32,10 @@ public class Snake extends Entity {
     }
 
     public void tick() {
+        if (dead) {
+            return;
+        }
+
         if (tick < speed) {
             tick++;
             return;
@@ -40,16 +43,13 @@ public class Snake extends Entity {
             tick = 0;
         }
 
-        if (dead) {
+        //TODO: levelComplete and levelChange logic
+        if (size >= 20){
+            dead = true;
+            victorious = true;
+            handler.getState().createUIManager();
             return;
         }
-
-        //TODO: levelComplete and levelChange logic
-        /*if (size >= 10){
-            dead = true;
-            handler.getGameState().levelCompleteUI();
-            return;
-        }*/
 
         getInput();
         BodyPart snakeHead = new BodyPart(handler, xCoor, yCoor);
@@ -127,6 +127,10 @@ public class Snake extends Entity {
 
     public List<BodyPart> getParts() {
         return snake;
+    }
+
+    public boolean isVictorious(){
+        return victorious;
     }
 
 }
