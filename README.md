@@ -1,4 +1,4 @@
 # Snake
 2D Game : Snake
 
-http://www.ex.ua/view/101324742
+download .jar here: http://www.ex.ua/view/101324742
