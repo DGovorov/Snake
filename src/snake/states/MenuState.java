@@ -14,6 +14,8 @@ import java.awt.*;
 public class MenuState extends State {
 
     private UIManager uiManager;
+    private final int appleFrames;
+    private int currentAppleFrame;
 
     public MenuState(Handler handler) {
         super(handler);
@@ -28,7 +30,7 @@ public class MenuState extends State {
             }
         }));
 
-        uiManager.add(new UIImageButton(234, 180 + 57, 171, 57, Assets.menuButtonOptions, new ClickListener() {
+        uiManager.add(new UIImageButton(234, 180 + 57, 171, 57, Assets.menuButtonEditor, new ClickListener() {
             @Override
             public void onClick() {
                 handler.getMouseManager().setUIManager(null);
@@ -42,6 +44,8 @@ public class MenuState extends State {
                 System.exit(0);
             }
         }));
+
+        appleFrames = Assets.rotatingApple.size();
     }
 
     //TODO: method was created for GameState class. Use this method properly in current class
@@ -58,6 +62,12 @@ public class MenuState extends State {
     @Override
     public void render(Graphics g) {
         g.drawImage(Assets.menuBackground, 0, 0, null);
+
+        g.drawImage(Assets.rotatingApple.get(currentAppleFrame), 410, 5, null);
+        currentAppleFrame++;
+        if (currentAppleFrame == appleFrames){
+            currentAppleFrame = 0;
+        }
         uiManager.render(g);
     }
 }

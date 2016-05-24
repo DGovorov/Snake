@@ -95,7 +95,7 @@ public class GameState extends State {
     private void levelCompleteUI() {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
-        uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.menuButtonStart, new ClickListener() {
+        uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.gameButtonNext, new ClickListener() {
             @Override
             public void onClick() {
                 currentWorld++;
@@ -127,8 +127,6 @@ public class GameState extends State {
         apple.render(g);
         if (uiManager != null) {
             uiManager.render(g);
-        } else {
-            System.out.println("null");
         }
     }
 
