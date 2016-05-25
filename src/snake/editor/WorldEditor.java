@@ -26,8 +26,6 @@ public class WorldEditor {
 
     private Tile brush;
     //TODO: safeMousePoint used in not the most appropriate way. fix it
-    private boolean safeMousePoint;
-    private String fileName;
 
     public WorldEditor(Handler handler) {
         this.handler = handler;
@@ -58,7 +56,7 @@ public class WorldEditor {
     }
 
     public void drawTile() {
-        if (safeMousePoint) {
+        if (drawCoordsCheck()) {
             tiles[mouseX][mouseY] = brush.getId();
         }
     }
@@ -73,21 +71,20 @@ public class WorldEditor {
 
     public void tick() {
         int currentX = handler.getMouseManager().getMouseX();
-        if (currentX >= 0 && currentX <= width * 20) {
+        //if (currentX >= 0 && currentX <= width * 20) {
             mouseX = (currentX - (currentX % 20)) / 20;
-        }
+
         int currentY = handler.getMouseManager().getMouseY();
-        if (currentY >= 0 && currentY <= height * 20) {
+        //if (currentY >= 0 && currentY <= height * 20) {
             mouseY = (currentY - (currentY % 20)) / 20;
-        }
+
         if (handler.getMouseManager().isLeftPressed()) {
             drawTile();
         }
-        if ((currentX < 0 || currentX >= 640) || (currentY < 0 || currentY >= 360)) {
-            safeMousePoint = false;
-        } else {
-            safeMousePoint = true;
-        }
+    }
+
+    private boolean drawCoordsCheck() {
+        return  ((mouseX >= 0 && mouseX <= 31) && (mouseY >= 0 && mouseY <= 17));
     }
 
     public void render(Graphics g) {

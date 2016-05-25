@@ -1,5 +1,6 @@
 package snake.states;
 
+import com.sun.net.httpserver.Authenticator;
 import snake.Handler;
 import snake.editor.WorldEditor;
 import snake.gfx.Assets;
@@ -80,6 +81,11 @@ public class EditorState extends State {
         }
     }
 
+    private static void infoBox(String infoMessage)
+    {
+        JOptionPane.showMessageDialog(null, infoMessage, "Notification", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     @Override
     public void createUIManager() {
         uiManager = new UIManager(handler);
@@ -88,12 +94,14 @@ public class EditorState extends State {
             @Override
             public void onClick() {
                 String nameInput = fileNameInputField.getText();
-                //TODO: validate name, check if such file already exists in Utils or WorldEditor class
                 if (nameInput != null){
                     fileName = nameInput;
                 }
                 List<String> world = worldEditor.worldToText();
+                //TODO: validate name, check if such file already exists in Utils or WorldEditor class
+                //TODO: Make saveStringToFile method boolean and popup success message only when world saved properly
                 Utils.saveStringToFile(world, fileName);
+                infoBox("World successfully created!");
             }
         }));
 
@@ -102,13 +110,14 @@ public class EditorState extends State {
             public void onClick() {
                 //TODO: rework this prototype of switching window size!
                 handler.getMouseManager().setUIManager(null);
-                handler.setState(new MenuState(handler));
                 handler.getDisplay().getCanvas().setMaximumSize(new Dimension(baseWidth, baseHeight));
                 handler.getDisplay().getCanvas().setMinimumSize(new Dimension(baseWidth, baseHeight));
                 handler.getDisplay().getFrame().remove(fileNameInputField);
                 handler.getDisplay().getFrame().setMaximumSize(new Dimension(baseWidth, baseHeight));
                 handler.getDisplay().getFrame().setMinimumSize(new Dimension(baseWidth, baseHeight));
                 handler.getDisplay().getFrame().pack();
+                handler.getDisplay().getFrame().requestFocus();
+                handler.setState(new MenuState(handler));
             }
         }));
 
@@ -167,6 +176,15 @@ public class EditorState extends State {
             @Override
             public void onClick() {
                 worldEditor.setBrush(Tile.mossStoneTile);
+            }
+        }));
+        Map<Boolean, BufferedImage> brickButton = new HashMap<>();
+        brickButton.put(true, Assets.brick);
+        brickButton.put(false, Assets.brick);
+        uiManager.add(new UIImageButton(tileStarterX + (step + 20) * 6, tileStarterY, 20, 20, brickButton, new ClickListener() {
+            @Override
+            public void onClick() {
+                worldEditor.setBrush(Tile.brickTile);
             }
         }));
     }

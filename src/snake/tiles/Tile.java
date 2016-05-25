@@ -15,6 +15,7 @@ public abstract class Tile {
     public static Tile sandTile = new SandTile();
     public static Tile waterTile = new WaterTile();
     public static Tile mossStoneTile = new MossStoneTile();
+    public static Tile brickTile = new BrickTile();
 
     public static final int TILE_WIDTH = 20;
     public static final int TILE_HEIGHT = 20;

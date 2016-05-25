@@ -20,6 +20,8 @@ public class KeyManager implements KeyListener {
     }
 
     public void tick() {
+        //KeyEvent event = new KeyEvent();
+
         up = keys[KeyEvent.VK_W] || keys[KeyEvent.VK_UP];
         down = keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN];
         left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];

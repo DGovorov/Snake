@@ -34,10 +34,10 @@ public class Game implements Runnable {
 
     private State currentState;
     public GameState gameState;
-    public State menuState;
+    //public State menuState;
 
     //TODO: keep this at 30fps after snake.speed logic is done
-    private int fps = 9;
+    private int fps = 30;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -51,6 +51,7 @@ public class Game implements Runnable {
     private void init() {
         display = new Display(title, width, height);
         display.getFrame().addKeyListener(keyManager);
+        display.getCanvas().addKeyListener(keyManager);
         //TODO: google more about that weird listeners addition
         display.getFrame().addMouseListener(mouseManager);
         display.getFrame().addMouseMotionListener(mouseManager);
@@ -61,7 +62,7 @@ public class Game implements Runnable {
         handler = new Handler(this);
 
         gameState = new GameState(handler);
-        menuState = new MenuState(handler);
+        MenuState menuState = new MenuState(handler);
         setCurrentState(menuState);
 
 
@@ -71,7 +72,7 @@ public class Game implements Runnable {
         /*TODO: fix bug! snake can turn 180* and hit itself
           TODO: because manager ticks more often than snake
           TODO: when using snake.speed */
-        keyManager.tick();
+        //keyManager.tick();
 
 
         if (getCurrentState() != null) {

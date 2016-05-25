@@ -4,6 +4,7 @@ import snake.Handler;
 import snake.entities.Apple;
 import snake.entities.Snake;
 import snake.gfx.Assets;
+import snake.input.KeyManager;
 import snake.ui.ClickListener;
 import snake.ui.UIImageButton;
 import snake.ui.UIManager;
@@ -17,13 +18,14 @@ import java.awt.Graphics;
  */
 public class GameState extends State {
 
+    private KeyManager keyManager;
     private World world;
     private Snake snake;
     private Apple apple;
     private UIManager uiManager;
     private int currentWorld;
-    //TODO: worldPath method
-    //TODO: !currentWorld is always 1 because levelComplete creates new GameState!
+    private int speed;
+    private int tick;
 
     public GameState(Handler handler) {
         super(handler);
@@ -32,6 +34,7 @@ public class GameState extends State {
     }
 
     public GameState(Handler handler, int worldNumber) {
+        //TODO: fix this messy constructor, calling init() method two times; (first call in this();)
         this(handler);
         currentWorld = worldNumber;
         init(handler);
@@ -41,6 +44,8 @@ public class GameState extends State {
     }
 
     private void init(Handler handler) {
+        //keyManager = new KeyManager();
+        keyManager = handler.getKeyManager();
         String worldPath = getWorldPath(currentWorld);
         world = new World(handler, worldPath);
         snake = new Snake(handler, handler.getxSpawn(), handler.getySpawn(), 3);
@@ -50,10 +55,17 @@ public class GameState extends State {
         handler.setSnake(snake);
         handler.setApple(apple);
         apple.respawn();
+        setSpeed(5);
     }
 
     private String getWorldPath(int currentWorld) {
         return "res/worlds/world" + currentWorld + ".txt";
+    }
+
+    public void setSpeed(int speed){
+        if (speed > 0 && speed < 20) {
+            this.speed = speed;
+        }
     }
 
     @Override
@@ -103,21 +115,29 @@ public class GameState extends State {
                 uiManager = null;
                 init(handler);
                 handler.getKeyManager().resetSnakeControlls();
-                String worldPath = getWorldPath(currentWorld);
                 handler.setState(new GameState(handler, currentWorld));
             }
         }));
     }
 
-    //TODO: changeLevel logic
-
     @Override
     public void tick() {
+        if (tick < speed){
+            tick++;
+            return;
+        } else {
+            tick = 0;
+        }
+
+        //handler.getKeyManager().tick();
+        keyManager.tick();
+
         world.tick();
         snake.tick();
         if (uiManager != null) {
             uiManager.tick();
         }
+
     }
 
     @Override

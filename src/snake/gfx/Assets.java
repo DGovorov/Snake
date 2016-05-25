@@ -25,6 +25,7 @@ public class Assets {
     public static BufferedImage sand;
     public static BufferedImage water;
     public static BufferedImage mossStone;
+    public static BufferedImage brick;
     public static BufferedImage apple;
     public static BufferedImage snakeBall;
 
@@ -97,15 +98,21 @@ public class Assets {
 
     private static void cropMainSheet() {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
+        //TODO: crop tiles in a loop, using collection
+        /*List<BufferedImage> images = new ArrayList<>();
+        images.add(dirt);
+        images.add(grass);*/
+
         dirt = sheet.crop(0, 0, TILE_WIDTH, TILE_HEIGHT);
         grass = sheet.crop(TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
         stone = sheet.crop(TILE_WIDTH * 2, 0, TILE_WIDTH, TILE_HEIGHT);
         sand = sheet.crop(TILE_WIDTH * 3, 0, TILE_WIDTH, TILE_HEIGHT);
         water = sheet.crop(TILE_WIDTH * 4, 0, TILE_WIDTH, TILE_HEIGHT);
         mossStone = sheet.crop(TILE_WIDTH * 5, 0, TILE_WIDTH, TILE_HEIGHT);
+        brick = sheet.crop(TILE_WIDTH * 6, 0, TILE_WIDTH, TILE_HEIGHT);
 
-        apple = sheet.crop(0, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
-        snakeBall = sheet.crop(TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        apple = sheet.crop(0, TILE_HEIGHT * 2, TILE_WIDTH, TILE_HEIGHT);
+        snakeBall = sheet.crop(TILE_WIDTH, TILE_HEIGHT * 2, TILE_WIDTH, TILE_HEIGHT);
     }
 
 }
