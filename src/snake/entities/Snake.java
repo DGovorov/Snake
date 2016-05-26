@@ -1,6 +1,7 @@
 package snake.entities;
 
 import snake.Handler;
+import snake.input.Direction;
 import snake.input.KeyManager;
 
 import java.awt.*;
@@ -15,9 +16,12 @@ public class Snake extends Entity {
 
     private List<BodyPart> snake;
     private int size;
+    private int speed = 5;
+    private int tick = 0;
     private boolean dead;
     private boolean victorious;
     private List<ScoringAnimation> scorings;
+    private List<Direction> directions;
 
     public Snake(Handler handler, int xCoor, int yCoor) {
         super(handler, xCoor, yCoor);
@@ -25,6 +29,7 @@ public class Snake extends Entity {
         snake.add(new BodyPart(handler, xCoor, yCoor));
         this.size = 0;
         scorings = new ArrayList<>();
+        directions = new ArrayList<>(2);
     }
 
     public Snake(Handler handler, int xCoor, int yCoor, int size) {
@@ -43,6 +48,16 @@ public class Snake extends Entity {
         }
 
         getInput();
+
+        if (tick < speed){
+            tick++;
+            return;
+        } else {
+            tick = 0;
+        }
+        move();
+
+
         BodyPart snakeHead = new BodyPart(handler, xCoor, yCoor);
 
         if (hitScreenBordersCheck()) {
@@ -57,23 +72,54 @@ public class Snake extends Entity {
             return;
         }
 
+        snake.add(snakeHead);
         meetAppleCheck();
 
         tickScoringAnimations();
 
         //movement logic
-        snake.add(snakeHead);
         if (snake.size() > size) {
             snake.remove(0);
         }
 
+        //temporary speed change during the game.
         if (size == 8) {
-            handler.getGameState().setSpeed(4);
+            setSpeed(4);
         }
         if (size == 14) {
-            handler.getGameState().setSpeed(3);
+            setSpeed(3);
         }
 
+    }
+
+    private void move() {
+        if(directions.isEmpty()){
+            return;
+        }
+        Direction direction = directions.get(0);
+        switch (direction) {
+            case LEFT:
+                xCoor -= 20;
+                break;
+            case RIGHT:
+                xCoor += 20;
+                break;
+            case UP:
+                yCoor -= 20;
+                break;
+            case DOWN:
+                yCoor += 20;
+                break;
+            default:
+                break;
+        }
+        directions.remove(0);
+    }
+
+    public void setSpeed(int speed){
+        if (speed > 0 && speed < 20) {
+            this.speed = speed;
+        }
     }
 
     private void tickScoringAnimations() {
@@ -147,8 +193,12 @@ public class Snake extends Entity {
 
     private void getInput() {
         KeyManager manager = handler.getKeyManager();
+        Direction up = Direction.UP;
+        Direction down = Direction.DOWN;
+        Direction left = Direction.LEFT;
+        Direction right = Direction.RIGHT;
 
-        if (manager.up) {
+        /*if (manager.up) {
             yCoor -= 20;
         }
         if (manager.down) {
@@ -159,6 +209,19 @@ public class Snake extends Entity {
         }
         if (manager.right) {
             xCoor += 20;
+        }*/
+
+        if (manager.up && !directions.contains(up)) {
+            directions.add(up);
+        }
+        if (manager.down && !directions.contains(down)) {
+            directions.add(down);
+        }
+        if (manager.left && !directions.contains(left)) {
+            directions.add(left);
+        }
+        if (manager.right && !directions.contains(right)) {
+            directions.add(right);
         }
     }
 

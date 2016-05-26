@@ -72,7 +72,7 @@ public class Game implements Runnable {
         /*TODO: fix bug! snake can turn 180* and hit itself
           TODO: because manager ticks more often than snake
           TODO: when using snake.speed */
-        //keyManager.tick();
+        keyManager.tick();
 
 
         if (getCurrentState() != null) {
