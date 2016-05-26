@@ -34,7 +34,7 @@ public class GameState extends State {
     }
 
     public GameState(Handler handler, int worldNumber) {
-        //TODO: fix this messy constructor, calling init() method two times; (first call in this();)
+        //TODO: fix this messy constructor, calling init() method two times; (first call in this() method;)
         this(handler);
         currentWorld = worldNumber;
         init(handler);
@@ -72,9 +72,10 @@ public class GameState extends State {
     public void createUIManager() {
 
         //TODO: !!! REMOVE && currentWorld != 5. workaround just to avoid fail on loading not existing file.
-        if (snake.isVictorious() && currentWorld != 5) {
+        if (snake.isVictorious() && currentWorld != 9) {
             levelCompleteUI();
         } else {
+            //TODO: Game Complete UI
             levelFailedUI();
         }
     }
@@ -115,7 +116,9 @@ public class GameState extends State {
                 uiManager = null;
                 init(handler);
                 handler.getKeyManager().resetSnakeControlls();
-                handler.setState(new GameState(handler, currentWorld));
+                GameState gameState = new GameState(handler, currentWorld);
+                handler.setState(gameState);
+                handler.setGameState(gameState);
             }
         }));
     }

@@ -67,6 +67,13 @@ public class Snake extends Entity {
             snake.remove(0);
         }
 
+        if (size == 8) {
+            handler.getGameState().setSpeed(4);
+        }
+        if (size == 14) {
+            handler.getGameState().setSpeed(3);
+        }
+
     }
 
     private void tickScoringAnimations() {

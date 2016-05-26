@@ -1,5 +1,7 @@
 package snake.gfx;
 
+import snake.tiles.Tile;
+
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +28,29 @@ public class Assets {
     public static BufferedImage water;
     public static BufferedImage mossStone;
     public static BufferedImage brick;
+    public static BufferedImage gravel;
+    public static BufferedImage snow;
+    public static BufferedImage iron;
+    public static BufferedImage gold;
+    public static BufferedImage diamond;
+
+    public static BufferedImage woolBlack;
+    public static BufferedImage woolDarkGrey;
+    public static BufferedImage woolRed;
+    public static BufferedImage woolPink;
+    public static BufferedImage woolDarkGreen;
+    public static BufferedImage woolGreen;
+    public static BufferedImage woolBrown;
+    public static BufferedImage woolYellow;
+    public static BufferedImage woolBlue;
+    public static BufferedImage woolTurquoise;
+    public static BufferedImage woolViolet;
+    public static BufferedImage woolDarkPink;
+    public static BufferedImage woolDarkTurquoise;
+    public static BufferedImage woolOrange;
+    public static BufferedImage woolGrey;
+    public static BufferedImage woolWhite;
+
     public static BufferedImage apple;
     public static BufferedImage snakeBall;
 
@@ -39,6 +64,7 @@ public class Assets {
     public static Map<Boolean, BufferedImage> editorButtonSave;
 
     public static BufferedImage tilePalette;
+    public static BufferedImage woodBackground;
 
     public static void init() {
         cropMainSheet();
@@ -47,9 +73,8 @@ public class Assets {
 
         cropAppleRotation();
 
-        SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/tilePalette.png"));
-        tilePalette = sheet.crop(0, 0, 250, 100);
-
+        tilePalette = ImageLoader.loadImage("/textures/tilePalette.png");
+        woodBackground = ImageLoader.loadImage("/textures/woodBackground.png");
         menuBackground = ImageLoader.loadImage("/textures/menuBackground.png");
     }
 
@@ -59,7 +84,7 @@ public class Assets {
 
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/appleRotation.png"));
         rotatingApple = new ArrayList<>();
-        for (int i = 0; i < 33; i++) {
+        for (int i = 0; i < 32; i++) {
             int xStep = i % 10;
             int yStep = i / 10;
             rotatingApple.add(sheet.crop(width * xStep, height * yStep, width, height));
@@ -98,10 +123,7 @@ public class Assets {
 
     private static void cropMainSheet() {
         SpriteSheet sheet = new SpriteSheet(ImageLoader.loadImage("/textures/sheet.png"));
-        //TODO: crop tiles in a loop, using collection
-        /*List<BufferedImage> images = new ArrayList<>();
-        images.add(dirt);
-        images.add(grass);*/
+        //TODO: crop tiles in a loop, using collection, probably store images as collection
 
         dirt = sheet.crop(0, 0, TILE_WIDTH, TILE_HEIGHT);
         grass = sheet.crop(TILE_WIDTH, 0, TILE_WIDTH, TILE_HEIGHT);
@@ -110,6 +132,28 @@ public class Assets {
         water = sheet.crop(TILE_WIDTH * 4, 0, TILE_WIDTH, TILE_HEIGHT);
         mossStone = sheet.crop(TILE_WIDTH * 5, 0, TILE_WIDTH, TILE_HEIGHT);
         brick = sheet.crop(TILE_WIDTH * 6, 0, TILE_WIDTH, TILE_HEIGHT);
+        gravel = sheet.crop(TILE_WIDTH * 7, 0, TILE_WIDTH, TILE_HEIGHT);
+        snow = sheet.crop(TILE_WIDTH * 8, 0, TILE_WIDTH, TILE_HEIGHT);
+        iron = sheet.crop(TILE_WIDTH * 9, 0, TILE_WIDTH, TILE_HEIGHT);
+        gold = sheet.crop(TILE_WIDTH * 10, 0, TILE_WIDTH, TILE_HEIGHT);
+        diamond = sheet.crop(TILE_WIDTH * 11, 0, TILE_WIDTH, TILE_HEIGHT);
+
+        woolBlack = sheet.crop(0, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolDarkGrey = sheet.crop(TILE_WIDTH, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolRed = sheet.crop(TILE_WIDTH * 2, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolPink = sheet.crop(TILE_WIDTH * 3, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolDarkGreen = sheet.crop(TILE_WIDTH * 4, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolGreen = sheet.crop(TILE_WIDTH * 5, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolBrown = sheet.crop(TILE_WIDTH * 6, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolYellow = sheet.crop(TILE_WIDTH * 7, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolBlue = sheet.crop(TILE_WIDTH * 8, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolTurquoise = sheet.crop(TILE_WIDTH * 9, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolViolet = sheet.crop(TILE_WIDTH * 10, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolDarkPink = sheet.crop(TILE_WIDTH * 11, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolDarkTurquoise = sheet.crop(TILE_WIDTH * 12, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolOrange = sheet.crop(TILE_WIDTH * 13, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolGrey = sheet.crop(TILE_WIDTH * 14, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
+        woolWhite = sheet.crop(TILE_WIDTH * 15, TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT);
 
         apple = sheet.crop(0, TILE_HEIGHT * 2, TILE_WIDTH, TILE_HEIGHT);
         snakeBall = sheet.crop(TILE_WIDTH, TILE_HEIGHT * 2, TILE_WIDTH, TILE_HEIGHT);

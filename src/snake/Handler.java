@@ -58,9 +58,15 @@ public class Handler {
         return game;
     }
 
-    public  void setState(State state) {game.setCurrentState(state);}
+    public void setState(State state) {
+        game.setCurrentState(state);
+    }
 
-    public GameState getGameState(){
+    public void setGameState(GameState gameState){
+        game.setGameState(gameState);
+    }
+
+    public GameState getGameState() {
         return game.gameState;
     }
 

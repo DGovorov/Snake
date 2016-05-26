@@ -167,6 +167,10 @@ public class Game implements Runnable {
         return height;
     }
 
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
     public State getCurrentState() {
         return currentState;
     }

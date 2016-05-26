@@ -5,7 +5,7 @@ package snake;
  */
 public class Launcher {
     public static void main(String[] args) {
-        String version = "0.8.3";
+        String version = "0.8.6";
         new Game("Snake Game " + version, 640, 360).start();
     }
 }
