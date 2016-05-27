@@ -7,9 +7,10 @@ import snake.gfx.Assets;
 import snake.ui.ClickListener;
 import snake.ui.UIImageButton;
 import snake.ui.UIManager;
+import snake.ui.UIObject;
 import snake.worlds.World;
 
-import java.awt.Graphics;
+import java.awt.*;
 
 
 /**
@@ -22,11 +23,18 @@ public class GameState extends State {
     private Apple apple;
     private UIManager uiManager;
     private int currentWorld;
+    private WelcomeMessage welcomeMessage;
 
     public GameState(Handler handler) {
         super(handler);
         currentWorld = 1;
         init(handler);
+        uiManager = new UIManager(handler);
+
+        //TODO: rework this terrible welcome message prototype, and in another constructor
+        welcomeMessage = new WelcomeMessage("Level " +currentWorld);
+        uiManager.add(welcomeMessage);
+
     }
 
     public GameState(Handler handler, int worldNumber) {
@@ -37,6 +45,10 @@ public class GameState extends State {
         if (world != null) {
             handler.setWorld(world);
         }
+
+        uiManager.remove(welcomeMessage);
+        welcomeMessage = new WelcomeMessage("Level " +currentWorld);
+        uiManager.add(welcomeMessage);
     }
 
     private void init(Handler handler) {
@@ -90,6 +102,7 @@ public class GameState extends State {
                 handler.setState(new MenuState(handler));
             }
         }));
+        uiManager.add(new FailMessage());
     }
 
     private void levelCompleteUI() {
@@ -117,6 +130,9 @@ public class GameState extends State {
         snake.tick();
         if (uiManager != null) {
             uiManager.tick();
+            if (!welcomeMessage.isGoing()){
+                uiManager.remove(welcomeMessage);
+            }
         }
 
     }
@@ -131,4 +147,61 @@ public class GameState extends State {
         }
     }
 
+    //TODO: think! Are these even worth being inner-classes
+    private class WelcomeMessage extends UIObject{
+
+        private int lifetime;
+        private String message;
+
+        public WelcomeMessage(String message) {
+            super(20, handler.getHeight() / 2, 0, 0);
+            lifetime = 130;
+            this.message = message;
+        }
+
+        public boolean isGoing() {
+            return (lifetime > 0);
+        }
+
+        public void tick() {
+            if (lifetime > 0) {
+                lifetime--;
+            }
+        }
+
+        public void render(Graphics g) {
+            int size = Math.max(lifetime, 42);
+            Font font = new Font("Serif", Font.PLAIN, size);
+            g.setFont(font);
+            g.setColor(Color.orange);
+            g.drawString(message, x, y);
+        }
+
+        @Override
+        public void onClick() {}
+    }
+
+    private class FailMessage extends UIObject {
+        public FailMessage() {
+            super(270, 150, 0, 0);
+        }
+
+        @Override
+        public void tick() {
+
+        }
+
+        @Override
+        public void render(Graphics g) {
+            Font font = new Font("Tahoma", Font.PLAIN, 46);
+            g.setFont(font);
+            g.setColor(Color.RED);
+            g.drawString("Dead!", x, y);
+        }
+
+        @Override
+        public void onClick() {
+
+        }
+    }
 }
