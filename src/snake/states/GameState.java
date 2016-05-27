@@ -4,10 +4,7 @@ import snake.Handler;
 import snake.entities.Apple;
 import snake.entities.Snake;
 import snake.gfx.Assets;
-import snake.ui.ClickListener;
-import snake.ui.UIImageButton;
-import snake.ui.UIManager;
-import snake.ui.UIObject;
+import snake.ui.*;
 import snake.worlds.World;
 
 import java.awt.*;
@@ -102,7 +99,7 @@ public class GameState extends State {
                 handler.setState(new MenuState(handler));
             }
         }));
-        uiManager.add(new FailMessage());
+        uiManager.add(new PopupMessage("Level Failed!", Color.RED));
     }
 
     private void levelCompleteUI() {
@@ -121,6 +118,7 @@ public class GameState extends State {
                 handler.setGameState(gameState);
             }
         }));
+        uiManager.add(new PopupMessage("Level Complete!", Color.GREEN));
     }
 
     @Override
@@ -179,29 +177,5 @@ public class GameState extends State {
 
         @Override
         public void onClick() {}
-    }
-
-    private class FailMessage extends UIObject {
-        public FailMessage() {
-            super(270, 150, 0, 0);
-        }
-
-        @Override
-        public void tick() {
-
-        }
-
-        @Override
-        public void render(Graphics g) {
-            Font font = new Font("Tahoma", Font.PLAIN, 46);
-            g.setFont(font);
-            g.setColor(Color.RED);
-            g.drawString("Dead!", x, y);
-        }
-
-        @Override
-        public void onClick() {
-
-        }
     }
 }
