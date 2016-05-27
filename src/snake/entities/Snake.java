@@ -96,6 +96,7 @@ public class Snake extends Entity {
         if(directions.isEmpty()){
             return;
         }
+
         Direction direction = directions.get(0);
         switch (direction) {
             case LEFT:
@@ -127,7 +128,7 @@ public class Snake extends Entity {
         while (i.hasNext()) {
             ScoringAnimation scoring = i.next();
             scoring.tick();
-            if (scoring.getLifetime() <= 0) {
+            if (!scoring.isGoing()) {
                 i.remove();
             }
         }
@@ -248,8 +249,8 @@ public class Snake extends Entity {
             correctCoords();
         }
 
-        public int getLifetime() {
-            return lifetime;
+        public boolean isGoing() {
+            return (lifetime > 0);
         }
 
         public void correctCoords() {

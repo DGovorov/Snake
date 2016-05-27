@@ -19,32 +19,32 @@ public class GameState extends State {
     private Snake snake;
     private Apple apple;
     private UIManager uiManager;
-    private int currentWorld;
+    private String currentWorld;
     private WelcomeMessage welcomeMessage;
 
     public GameState(Handler handler) {
         super(handler);
-        currentWorld = 1;
+        currentWorld = "world1";
         init(handler);
         uiManager = new UIManager(handler);
 
         //TODO: rework this terrible welcome message prototype, and in another constructor
-        welcomeMessage = new WelcomeMessage("Level " +currentWorld);
+        welcomeMessage = new WelcomeMessage("Level " + currentWorld);
         uiManager.add(welcomeMessage);
 
     }
 
-    public GameState(Handler handler, int worldNumber) {
+    public GameState(Handler handler, String worldName) {
         //TODO: fix this messy constructor, calling init() method two times; (first call in this() method;)
         this(handler);
-        currentWorld = worldNumber;
+        currentWorld = worldName;
         init(handler);
         if (world != null) {
             handler.setWorld(world);
         }
 
         uiManager.remove(welcomeMessage);
-        welcomeMessage = new WelcomeMessage("Level " +currentWorld);
+        welcomeMessage = new WelcomeMessage("Level " + currentWorld);
         uiManager.add(welcomeMessage);
     }
 
@@ -60,15 +60,15 @@ public class GameState extends State {
         apple.respawn();
     }
 
-    private String getWorldPath(int currentWorld) {
-        return "res/worlds/world" + currentWorld + ".txt";
+    private String getWorldPath(String currentWorld) {
+        return "res/worlds/" + currentWorld + ".txt";
     }
 
     @Override
     public void createUIManager() {
 
         //TODO: !!! REMOVE && currentWorld != 5. workaround just to avoid fail on loading not existing file.
-        if (snake.isVictorious() && currentWorld != 9) {
+        if (snake.isVictorious() && !currentWorld.equals("world9")) {
             levelCompleteUI();
         } else {
             //TODO: Game Complete UI
@@ -108,7 +108,9 @@ public class GameState extends State {
         uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.gameButtonNext, new ClickListener() {
             @Override
             public void onClick() {
-                currentWorld++;
+                int number = Integer.valueOf(currentWorld.substring(5, 6));
+                number++;
+                currentWorld = "world" + number;
                 handler.getMouseManager().setUIManager(null);
                 uiManager = null;
                 init(handler);
@@ -128,7 +130,7 @@ public class GameState extends State {
         snake.tick();
         if (uiManager != null) {
             uiManager.tick();
-            if (!welcomeMessage.isGoing()){
+            if (!welcomeMessage.isGoing()) {
                 uiManager.remove(welcomeMessage);
             }
         }
@@ -146,7 +148,7 @@ public class GameState extends State {
     }
 
     //TODO: think! Are these even worth being inner-classes
-    private class WelcomeMessage extends UIObject{
+    private class WelcomeMessage extends UIObject {
 
         private int lifetime;
         private String message;
@@ -176,6 +178,7 @@ public class GameState extends State {
         }
 
         @Override
-        public void onClick() {}
+        public void onClick() {
+        }
     }
 }

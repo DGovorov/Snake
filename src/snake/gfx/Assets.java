@@ -63,6 +63,8 @@ public class Assets {
     public static Map<Boolean, BufferedImage> gameButtonNext;
     public static Map<Boolean, BufferedImage> editorButtonSave;
 
+    public static Map<Boolean, BufferedImage> worldButton;
+
     public static BufferedImage tilePalette;
     public static BufferedImage woodBackground;
 
@@ -119,6 +121,11 @@ public class Assets {
         gameButtonNext = new HashMap<>();
         gameButtonNext.put(false, sheet.crop(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT * 6, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         gameButtonNext.put(true, sheet.crop(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT * 7, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+
+        sheet = new SpriteSheet(ImageLoader.loadImage("/textures/worldButton.png"));
+        worldButton = new HashMap<>();
+        worldButton.put(false, sheet.crop(0, 0, 214, 40));
+        worldButton.put(true, sheet.crop(0, 40, 214, 40));
     }
 
     private static void cropMainSheet() {
