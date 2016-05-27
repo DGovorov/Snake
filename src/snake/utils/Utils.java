@@ -24,18 +24,21 @@ public class Utils {
         return builder.toString();
     }
 
-    public static void saveStringToFile(List<String> world, String fileName){
+    public static boolean saveStringToFile(List<String> world, String fileName) {
         String path = "res/worlds/" + fileName + ".txt";
-        //TODO: make fileExistsCheck()
         File file = new File(path);
-        try (Writer writer = new FileWriter(file, true)){
-            for (String string : world) {
-                writer.write(string);
-                writer.write("\n");
+        if (!file.exists()) {
+            try (Writer writer = new BufferedWriter(new FileWriter(file, true))) {
+                for (String string : world) {
+                    writer.write(string);
+                    writer.write("\n");
+                }
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        return false;
     }
 
     public static int parseInt(String number) {

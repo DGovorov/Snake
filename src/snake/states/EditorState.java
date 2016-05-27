@@ -43,7 +43,7 @@ public class EditorState extends State {
         canvas.setMaximumSize(new Dimension(baseWidth, baseHeight + 120));
         //yeah, and frame too
         JFrame frame = handler.getDisplay().getFrame();
-        frame.resize(baseWidth +5, baseHeight + 140);
+        frame.resize(baseWidth + 5, baseHeight + 140);
 
         //adding text field to frame
         fileNameInputField = new JTextField(10);
@@ -100,8 +100,11 @@ public class EditorState extends State {
                 List<String> world = worldEditor.worldToText();
                 //TODO: validate name, check if such file already exists in Utils or WorldEditor class
                 //TODO: Make saveStringToFile method boolean and popup success message only when world saved properly
-                Utils.saveStringToFile(world, fileName);
-                infoBox("World \"" + fileName + "\" successfully created!");
+                if (Utils.saveStringToFile(world, fileName)) {
+                    infoBox("World \"" + fileName + "\" successfully created!");
+                } else {
+                    infoBox("WARNING:\nWorld \"" + fileName + "\" already exists!");
+                }
             }
         }));
 
