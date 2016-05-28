@@ -9,6 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Dim on 17.05.2016.
@@ -95,7 +96,22 @@ public class WorldEditor {
         }
     }
 
+    public void correctSpawn() {
+        while (spawnCheck()){
+            Random r = new Random();
+            xSpawn = r.nextInt(31) * 20;
+            ySpawn = r.nextInt(17) * 20;
+        }
+    }
+
+    //TODO: Never ever write code like this.
+    public boolean spawnCheck() {
+        return Tile.tiles[tiles[xSpawn/20][ySpawn/20]].isSolid();
+    }
+
     public List<String> worldToText() {
+        correctSpawn();
+
         List<String> world = new ArrayList<>();
         //TODO: think about how to remove the last +" " in strings, workaround
         world.add(width + " " + height + " ");

@@ -43,10 +43,6 @@ public class Snake extends Entity {
             return;
         }
 
-        if (levelCompleteCheck()) {
-            return;
-        }
-
         getInput();
 
         if (tick < speed){
@@ -134,14 +130,16 @@ public class Snake extends Entity {
         }
     }
 
-    private boolean levelCompleteCheck() {
-        if (size >= 20) {
-            dead = true;
-            victorious = true;
-            handler.getState().createUIManager();
-            return true;
-        }
-        return false;
+    public int getSize() {
+        return size;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public void setVictorious(boolean victorious) {
+        this.victorious = victorious;
     }
 
     private void meetAppleCheck() {

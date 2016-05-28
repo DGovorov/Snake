@@ -21,6 +21,8 @@ public class GameState extends State {
     private UIManager uiManager;
     private String currentWorld;
     private WelcomeMessage welcomeMessage;
+    private boolean endless;
+    private boolean over;
 
     public GameState(Handler handler) {
         super(handler);
@@ -29,7 +31,7 @@ public class GameState extends State {
         uiManager = new UIManager(handler);
 
         //TODO: rework this terrible welcome message prototype, and in another constructor
-        welcomeMessage = new WelcomeMessage("Level " + currentWorld);
+        welcomeMessage = new WelcomeMessage(currentWorld);
         uiManager.add(welcomeMessage);
 
     }
@@ -44,8 +46,13 @@ public class GameState extends State {
         }
 
         uiManager.remove(welcomeMessage);
-        welcomeMessage = new WelcomeMessage("Level " + currentWorld);
+        welcomeMessage = new WelcomeMessage(currentWorld);
         uiManager.add(welcomeMessage);
+    }
+
+    public GameState(Handler handler, String worldName, boolean isEndless){
+        this(handler, worldName);
+        endless = isEndless;
     }
 
     private void init(Handler handler) {
@@ -99,7 +106,7 @@ public class GameState extends State {
                 handler.setState(new MenuState(handler));
             }
         }));
-        uiManager.add(new PopupMessage("Level Failed!", Color.RED));
+        uiManager.add(new PopupMessage("Dead. Score: " + snake.getSize(), Color.RED));
     }
 
     private void levelCompleteUI() {
@@ -135,6 +142,20 @@ public class GameState extends State {
             }
         }
 
+        if (!endless && !over){
+            over = levelCompleteCheck();
+        }
+
+    }
+
+    private boolean levelCompleteCheck() {
+        if (snake.getSize() >= 20) {
+            snake.setDead(true);
+            snake.setVictorious(true);
+            createUIManager();
+            return true;
+        }
+        return false;
     }
 
     @Override

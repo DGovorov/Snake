@@ -16,7 +16,7 @@ public class UIWorldButton extends UIObject {
     private String worldName;
     private ClickListener clicker;
     private Map<Boolean, BufferedImage> images;
-    private static int bWidth = 214;
+    private static int bWidth = 200;
     private static int bHeight = 40;
     private Font font;
 

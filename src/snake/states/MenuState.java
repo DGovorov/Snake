@@ -5,7 +5,6 @@ import snake.gfx.Assets;
 import snake.ui.ClickListener;
 import snake.ui.UIImageButton;
 import snake.ui.UIManager;
-import snake.ui.UITileButton;
 
 import java.awt.*;
 
@@ -31,7 +30,7 @@ public class MenuState extends State {
 
 
 
-        uiManager.add(new UIImageButton(400, 180, 171, 57, Assets.menuButtonStart, new ClickListener() {
+        uiManager.add(new UIImageButton(234, 180 + 59, 171, 57, Assets.menuButtonEndless, new ClickListener() {
             @Override
             public void onClick() {
                 handler.getMouseManager().setUIManager(null);
@@ -52,7 +51,7 @@ public class MenuState extends State {
             }
         }));
 
-        uiManager.add(new UIImageButton(234, 180 + 57, 171, 57, Assets.menuButtonEditor, new ClickListener() {
+        uiManager.add(new UIImageButton(234, 180 + 57 * 2, 171, 57, Assets.menuButtonEditor, new ClickListener() {
             @Override
             public void onClick() {
                 handler.getMouseManager().setUIManager(null);
@@ -60,7 +59,7 @@ public class MenuState extends State {
             }
         }));
 
-        uiManager.add(new UIImageButton(234, 180 + 57 * 2, 171, 57, Assets.menuButtonQuit, new ClickListener() {
+        uiManager.add(new UIImageButton(234 + 200, 180 + 57 * 2, 171, 57, Assets.menuButtonQuit, new ClickListener() {
             @Override
             public void onClick() {
                 System.exit(0);

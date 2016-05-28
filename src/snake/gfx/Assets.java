@@ -1,7 +1,5 @@
 package snake.gfx;
 
-import snake.tiles.Tile;
-
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +17,7 @@ public class Assets {
     private static final int MENU_BUTTON_HEIGHT = 57;
 
     public static BufferedImage menuBackground;
+    public static BufferedImage worldsBackground;
     public static List<BufferedImage> rotatingApple;
 
     public static BufferedImage dirt;
@@ -62,6 +61,8 @@ public class Assets {
     public static Map<Boolean, BufferedImage> gameButtonMenu;
     public static Map<Boolean, BufferedImage> gameButtonNext;
     public static Map<Boolean, BufferedImage> editorButtonSave;
+    public static Map<Boolean, BufferedImage> menuButtonEndless;
+
 
     public static Map<Boolean, BufferedImage> worldButton;
 
@@ -78,6 +79,7 @@ public class Assets {
         tilePalette = ImageLoader.loadImage("/textures/tilePalette.png");
         woodBackground = ImageLoader.loadImage("/textures/woodBackground.png");
         menuBackground = ImageLoader.loadImage("/textures/menuBackground.png");
+        worldsBackground = ImageLoader.loadImage("/textures/worldsBackground.png");
     }
 
     private static void cropAppleRotation() {
@@ -122,10 +124,15 @@ public class Assets {
         gameButtonNext.put(false, sheet.crop(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT * 6, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
         gameButtonNext.put(true, sheet.crop(MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT * 7, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
 
+        menuButtonEndless = new HashMap<>();
+        menuButtonEndless.put(false, sheet.crop(0, MENU_BUTTON_HEIGHT * 10, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+        menuButtonEndless.put(true, sheet.crop(0, MENU_BUTTON_HEIGHT * 11, MENU_BUTTON_WIDTH, MENU_BUTTON_HEIGHT));
+
+
         sheet = new SpriteSheet(ImageLoader.loadImage("/textures/worldButton.png"));
         worldButton = new HashMap<>();
-        worldButton.put(false, sheet.crop(0, 0, 214, 40));
-        worldButton.put(true, sheet.crop(0, 40, 214, 40));
+        worldButton.put(false, sheet.crop(0, 0, 200, 40));
+        worldButton.put(true, sheet.crop(0, 40, 200, 40));
     }
 
     private static void cropMainSheet() {

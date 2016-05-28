@@ -1,7 +1,9 @@
 package snake.states;
 
 import snake.Handler;
+import snake.gfx.Assets;
 import snake.ui.ClickListener;
+import snake.ui.UIImageButton;
 import snake.ui.UIManager;
 import snake.ui.UIWorldButton;
 import snake.utils.Utils;
@@ -32,6 +34,8 @@ public class WorldChoosingState extends State {
 
     @Override
     public void render(Graphics g) {
+        g.drawImage(Assets.worldsBackground, 0, 0, null);
+
         if (uiManager != null){
             uiManager.render(g);
         }
@@ -55,14 +59,23 @@ public class WorldChoosingState extends State {
                 @Override
                 public void onClick() {
                     handler.getMouseManager().setUIManager(null);
-                    handler.setState(new GameState(handler, worldName));
+                    handler.setState(new GameState(handler, worldName, true));
                 }
             }));
             yStep += 40;
             if (yStep > 310){
                 yStep = 0;
-                xStep += 20 + 214;
+                xStep += 5 + 200;
             }
         }
+
+        uiManager.add(new UIImageButton(460, 300, 171, 57, Assets.gameButtonMenu, new ClickListener() {
+            @Override
+            public void onClick() {
+                handler.getMouseManager().setUIManager(null);
+                uiManager = null;
+                handler.setState(new MenuState(handler));
+            }
+        }));
     }
 }
