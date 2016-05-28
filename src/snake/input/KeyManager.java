@@ -14,6 +14,11 @@ public class KeyManager implements KeyListener {
     public boolean left;
     public boolean right;
 
+    public boolean keyOne;
+    public boolean keyTwo;
+    public boolean keyThree;
+    public boolean keyFour;
+
     public KeyManager() {
         keys = new boolean[256];
         right = true;
@@ -26,6 +31,11 @@ public class KeyManager implements KeyListener {
         down = keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN];
         left = keys[KeyEvent.VK_A] || keys[KeyEvent.VK_LEFT];
         right = keys[KeyEvent.VK_D] || keys[KeyEvent.VK_RIGHT];
+
+        keyOne = keys[KeyEvent.VK_1];
+        keyTwo = keys[KeyEvent.VK_2];
+        keyThree = keys[KeyEvent.VK_3];
+        keyFour = keys[KeyEvent.VK_4];
 
     }
 
@@ -49,6 +59,27 @@ public class KeyManager implements KeyListener {
         if ((keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) && !down) {
             clearLeftAndRight();
             keys[keyCode] = true;
+        }
+
+        switch (keyCode){
+            case KeyEvent.VK_1:
+                keys[KeyEvent.VK_1] = true;
+                break;
+            case KeyEvent.VK_2:
+                keys[KeyEvent.VK_2] = true;
+                break;
+            case KeyEvent.VK_3:
+                keys[KeyEvent.VK_3] = true;
+                break;
+            case KeyEvent.VK_4:
+                keys[KeyEvent.VK_4] = true;
+                break;
+            default:
+                keys[KeyEvent.VK_1] = false;
+                keys[KeyEvent.VK_2] = false;
+                keys[KeyEvent.VK_3] = false;
+                keys[KeyEvent.VK_4] = false;
+                break;
         }
     }
 

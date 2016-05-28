@@ -79,10 +79,17 @@ public class Snake extends Entity {
         }
 
         //temporary speed change during the game.
-        if (size == 8) {
+        KeyManager keyManager = handler.getKeyManager();
+        if (keyManager.keyOne){
+            setSpeed(6);
+        }
+        if (keyManager.keyTwo){
+            setSpeed(5);
+        }
+        if (keyManager.keyThree){
             setSpeed(4);
         }
-        if (size == 14) {
+        if (keyManager.keyFour){
             setSpeed(3);
         }
 
@@ -196,19 +203,6 @@ public class Snake extends Entity {
         Direction down = Direction.DOWN;
         Direction left = Direction.LEFT;
         Direction right = Direction.RIGHT;
-
-        /*if (manager.up) {
-            yCoor -= 20;
-        }
-        if (manager.down) {
-            yCoor += 20;
-        }
-        if (manager.left) {
-            xCoor -= 20;
-        }
-        if (manager.right) {
-            xCoor += 20;
-        }*/
 
         if (manager.up && !directions.contains(up)) {
             directions.add(up);
