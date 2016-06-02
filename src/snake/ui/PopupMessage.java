@@ -29,14 +29,23 @@ public class PopupMessage extends UIObject {
     public void render(Graphics g) {
         Font font = new Font("Serif", Font.PLAIN, 46);
 
-        //
-        FontMetrics metrics = g.getFontMetrics(font);
-        x = (640 - metrics.stringWidth(message)) / 2;
-        y = ((300 - metrics.getHeight()) / 2) + metrics.getAscent();
-        //
+        coordinatesCorrection(g, font);
+
         g.setFont(font);
         g.setColor(color);
         g.drawString(message, x, y);
+    }
+
+    /**
+     * different fonts produce letters with different width/height, and this method is needed to center the text properly
+     *
+     * @param g
+     * @param font
+     */
+    private void coordinatesCorrection(Graphics g, Font font) {
+        FontMetrics metrics = g.getFontMetrics(font);
+        x = (640 - metrics.stringWidth(message)) / 2;
+        y = ((300 - metrics.getHeight()) / 2) + metrics.getAscent();
     }
 
     @Override

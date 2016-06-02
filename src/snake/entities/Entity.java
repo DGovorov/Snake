@@ -19,8 +19,6 @@ public abstract class Entity {
         this.yCoor = yCoor;
     }
 
-    //public abstract void tick();
-
     public abstract void render(Graphics g);
 
     public Handler getGame() {

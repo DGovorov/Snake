@@ -21,8 +21,4 @@ public abstract class State {
 
     public abstract void createUIManager();
 
-
-    //Game tick() and render(), and Handler . getState().
-    //GameState Game and MenuState
-
 }

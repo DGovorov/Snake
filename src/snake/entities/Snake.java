@@ -45,7 +45,7 @@ public class Snake extends Entity {
 
         getInput();
 
-        if (tick < speed){
+        if (tick < speed) {
             tick++;
             return;
         } else {
@@ -73,30 +73,33 @@ public class Snake extends Entity {
 
         tickScoringAnimations();
 
-        //movement logic
-        if (snake.size() > size) {
-            snake.remove(0);
-        }
+        removeLastTailPart();
 
         //temporary speed change during the game.
         KeyManager keyManager = handler.getKeyManager();
-        if (keyManager.keyOne){
+        if (keyManager.keyOne) {
             setSpeed(6);
         }
-        if (keyManager.keyTwo){
+        if (keyManager.keyTwo) {
             setSpeed(5);
         }
-        if (keyManager.keyThree){
+        if (keyManager.keyThree) {
             setSpeed(4);
         }
-        if (keyManager.keyFour){
+        if (keyManager.keyFour) {
             setSpeed(3);
         }
 
     }
 
+    private void removeLastTailPart() {
+        if (snake.size() > size) {
+            snake.remove(0);
+        }
+    }
+
     private void move() {
-        if(directions.isEmpty()){
+        if (directions.isEmpty()) {
             return;
         }
 
@@ -120,7 +123,7 @@ public class Snake extends Entity {
         directions.remove(0);
     }
 
-    public void setSpeed(int speed){
+    public void setSpeed(int speed) {
         if (speed > 0 && speed < 20) {
             this.speed = speed;
         }

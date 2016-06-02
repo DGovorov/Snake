@@ -34,9 +34,7 @@ public class Game implements Runnable {
 
     private State currentState;
     public GameState gameState;
-    //public State menuState;
 
-    //TODO: keep this at 30fps after snake.speed logic is done
     private int fps = 30;
 
     public Game(String title, int width, int height) {
@@ -69,9 +67,6 @@ public class Game implements Runnable {
     }
 
     private void tick() {
-        /*TODO: fix bug! snake can turn 180* and hit itself
-          TODO: because manager ticks more often than snake
-          TODO: when using snake.speed */
         keyManager.tick();
 
 
@@ -107,7 +102,6 @@ public class Game implements Runnable {
         long now;
         long lastTime = System.nanoTime();
         long timer = 0;
-        int ticks = 0;
 
         while (running) {
             now = System.nanoTime();
@@ -118,14 +112,10 @@ public class Game implements Runnable {
             if (delta >= 1) {
                 tick();
                 render();
-                ticks++;
                 delta--;
             }
 
             if (timer >= 1_000_000_000) {
-                //TODO: remove this SysOut
-                System.out.println("Ticks and Frames: " + ticks);
-                ticks = 0;
                 timer = 0;
             }
         }

@@ -25,7 +25,6 @@ public class KeyManager implements KeyListener {
     }
 
     public void tick() {
-        //KeyEvent event = new KeyEvent();
 
         up = keys[KeyEvent.VK_W] || keys[KeyEvent.VK_UP];
         down = keys[KeyEvent.VK_S] || keys[KeyEvent.VK_DOWN];
@@ -42,7 +41,6 @@ public class KeyManager implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
-        //TODO: nullify all the directions except just one and move and move "choosing" logic to Snake class
         int keyCode = e.getKeyCode();
         if ((keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) && !left) {
             clearUpAndDown();
@@ -61,7 +59,7 @@ public class KeyManager implements KeyListener {
             keys[keyCode] = true;
         }
 
-        switch (keyCode){
+        switch (keyCode) {
             case KeyEvent.VK_1:
                 keys[KeyEvent.VK_1] = true;
                 break;

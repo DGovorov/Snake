@@ -28,26 +28,19 @@ public class MenuState extends State {
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUIManager(uiManager);
 
-
+        uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.menuButtonStart, new ClickListener() {
+            @Override
+            public void onClick() {
+                handler.getMouseManager().setUIManager(null);
+                handler.setState(new GameState(handler));
+            }
+        }));
 
         uiManager.add(new UIImageButton(234, 180 + 59, 171, 57, Assets.menuButtonEndless, new ClickListener() {
             @Override
             public void onClick() {
                 handler.getMouseManager().setUIManager(null);
-                //handler.setState(handler.getGameState());
-                handler.setState(new WorldChoosingState(handler));
-            }
-        }));
-
-
-
-
-        uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.menuButtonStart, new ClickListener() {
-            @Override
-            public void onClick() {
-                handler.getMouseManager().setUIManager(null);
-                //handler.setState(handler.getGameState());
-                handler.setState(new GameState(handler));
+                handler.setState(new WorldSelectionState(handler));
             }
         }));
 
@@ -75,17 +68,19 @@ public class MenuState extends State {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Assets.menuBackground, 0, 0, null);
-
+        drawBackground(g);
         drawRotatingApple(g);
-
         uiManager.render(g);
     }
 
+    private void drawBackground(Graphics g) {
+        g.drawImage(Assets.menuBackground, 0, 0, null);
+    }
+
     private void drawRotatingApple(Graphics g) {
-        g.drawImage(Assets.rotatingApple.get(currentAppleFrame/2), 410, 5, null);
+        g.drawImage(Assets.rotatingApple.get(currentAppleFrame / 2), 410, 5, null);
         currentAppleFrame++;
-        if (currentAppleFrame == appleFrames * 2){
+        if (currentAppleFrame == appleFrames * 2) {
             currentAppleFrame = 0;
         }
     }

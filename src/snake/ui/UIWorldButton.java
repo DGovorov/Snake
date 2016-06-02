@@ -41,7 +41,7 @@ public class UIWorldButton extends UIObject {
 
     @Override
     public void render(Graphics g) {
-        if (hovering){
+        if (hovering) {
             g.drawImage(images.get(true), x, y, null);
         } else {
             g.drawImage(images.get(false), x, y, null);
@@ -51,8 +51,8 @@ public class UIWorldButton extends UIObject {
         g.setFont(font);
 
         FontMetrics metrics = g.getFontMetrics(font);
-        int textX = x + bWidth/2 - (metrics.stringWidth(worldName)) / 2;
-        int textY = y + bHeight/2 - ((metrics.getHeight()) / 2) + metrics.getAscent();
+        int textX = x + bWidth / 2 - (metrics.stringWidth(worldName)) / 2;
+        int textY = y + bHeight / 2 - ((metrics.getHeight()) / 2) + metrics.getAscent();
 
         g.drawString(worldName, textX, textY);
     }

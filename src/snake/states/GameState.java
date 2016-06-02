@@ -50,7 +50,7 @@ public class GameState extends State {
         uiManager.add(welcomeMessage);
     }
 
-    public GameState(Handler handler, String worldName, boolean isEndless){
+    public GameState(Handler handler, String worldName, boolean isEndless) {
         this(handler, worldName);
         endless = isEndless;
     }
@@ -58,12 +58,14 @@ public class GameState extends State {
     private void init(Handler handler) {
         String worldPath = getWorldPath(currentWorld);
         world = new World(handler, worldPath);
-        snake = new Snake(handler, handler.getxSpawn(), handler.getySpawn(), 3);
-        apple = new Apple(handler, 80, 80);
-
         handler.setWorld(world);
+
+        snake = new Snake(handler, handler.getxSpawn(), handler.getySpawn(), 3);
         handler.setSnake(snake);
+
+        apple = new Apple(handler);
         handler.setApple(apple);
+
         apple.respawn();
     }
 
@@ -74,7 +76,7 @@ public class GameState extends State {
     @Override
     public void createUIManager() {
 
-        //TODO: !!! REMOVE && currentWorld != 5. workaround just to avoid fail on loading not existing file.
+        //TODO: !!! rework game_end logic. current if() statement is used just to avoid loading non existing file
         if (snake.isVictorious() && !currentWorld.equals("world9")) {
             levelCompleteUI();
         } else {
@@ -89,7 +91,6 @@ public class GameState extends State {
         uiManager.add(new UIImageButton(234, 180, 171, 57, Assets.gameButtonRestart, new ClickListener() {
             @Override
             public void onClick() {
-                //TODO: replace this uiManager workaround. (two following lines)
                 handler.getMouseManager().setUIManager(null);
                 uiManager = null;
                 init(handler);
@@ -142,7 +143,7 @@ public class GameState extends State {
             }
         }
 
-        if (!endless && !over){
+        if (!endless && !over) {
             over = levelCompleteCheck();
         }
 

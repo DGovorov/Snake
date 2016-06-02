@@ -12,9 +12,13 @@ import java.util.List;
  */
 public class Apple extends Entity {
 
-    //TODO add constructor without x|y paratemers
     public Apple(Handler handler, int xCoor, int yCoor) {
         super(handler, xCoor, yCoor);
+    }
+
+    public Apple(Handler handler) {
+        this(handler, 0, 0);
+        respawn();
     }
 
     public void respawn() {
@@ -22,19 +26,25 @@ public class Apple extends Entity {
         xCoor = r.nextInt(handler.getWidth() / 20) * 20;
         yCoor = r.nextInt(handler.getHeight() / 20) * 20;
 
-        //spawned in Solid check
-        if (handler.getTile(xCoor / 20, yCoor / 20).isSolid()) {
-            respawn();
-        }
+        spawnInSolidCheck();
 
-        //spawned in Snake check
+        spawnInSnakeCheck();
+
+    }
+
+    private void spawnInSnakeCheck() {
         List<BodyPart> snakeParts = handler.getSnake().getParts();
         for (BodyPart part : snakeParts) {
             if (xCoor == part.getxCoor() && yCoor == part.getyCoor()) {
                 respawn();
             }
         }
+    }
 
+    private void spawnInSolidCheck() {
+        if (handler.getTile(xCoor / 20, yCoor / 20).isSolid()) {
+            respawn();
+        }
     }
 
     @Override

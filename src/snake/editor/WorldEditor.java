@@ -26,7 +26,6 @@ public class WorldEditor {
     private int[][] tiles;
 
     private Tile brush;
-    //TODO: safeMousePoint used in not the most appropriate way. fix it
 
     public WorldEditor(Handler handler) {
         this.handler = handler;
@@ -72,12 +71,10 @@ public class WorldEditor {
 
     public void tick() {
         int currentX = handler.getMouseManager().getMouseX();
-        //if (currentX >= 0 && currentX <= width * 20) {
-            mouseX = (currentX - (currentX % 20)) / 20;
+        mouseX = (currentX - (currentX % 20)) / 20;
 
         int currentY = handler.getMouseManager().getMouseY();
-        //if (currentY >= 0 && currentY <= height * 20) {
-            mouseY = (currentY - (currentY % 20)) / 20;
+        mouseY = (currentY - (currentY % 20)) / 20;
 
         if (handler.getMouseManager().isLeftPressed()) {
             drawTile();
@@ -85,7 +82,7 @@ public class WorldEditor {
     }
 
     private boolean drawCoordsCheck() {
-        return  ((mouseX >= 0 && mouseX <= 31) && (mouseY >= 0 && mouseY <= 17));
+        return ((mouseX >= 0 && mouseX <= 31) && (mouseY >= 0 && mouseY <= 17));
     }
 
     public void render(Graphics g) {
@@ -97,23 +94,21 @@ public class WorldEditor {
     }
 
     public void correctSpawn() {
-        while (spawnCheck()){
+        while (spawnCheck()) {
             Random r = new Random();
             xSpawn = r.nextInt(31) * 20;
             ySpawn = r.nextInt(17) * 20;
         }
     }
 
-    //TODO: Never ever write code like this.
     public boolean spawnCheck() {
-        return Tile.tiles[tiles[xSpawn/20][ySpawn/20]].isSolid();
+        return Tile.tiles[tiles[xSpawn / 20][ySpawn / 20]].isSolid();
     }
 
     public List<String> worldToText() {
         correctSpawn();
 
         List<String> world = new ArrayList<>();
-        //TODO: think about how to remove the last +" " in strings, workaround
         world.add(width + " " + height + " ");
         world.add(xSpawn + " " + ySpawn + " ");
 
@@ -129,9 +124,4 @@ public class WorldEditor {
         return world;
     }
 
-    //TODO: manage saving tiles to file as string
-
-    //TODO: make brushChange UI
-
-    //TODO: think about running WorldEditor inside Game class as State, or separate executable
 }

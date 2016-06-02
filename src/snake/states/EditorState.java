@@ -93,39 +93,44 @@ public class EditorState extends State {
         uiManager.add(new UIImageButton(289, 385, 171, 57, Assets.editorButtonSave, new ClickListener() {
             @Override
             public void onClick() {
-                String nameInput = fileNameInputField.getText();
-                if (nameInput != null) {
-                    fileName = nameInput;
-                }
-                List<String> world = worldEditor.worldToText();
-                //TODO: validate name, check if such file already exists in Utils or WorldEditor class
-                //TODO: Make saveStringToFile method boolean and popup success message only when world saved properly
-                if (Utils.saveStringToFile(world, fileName)) {
-                    infoBox("World \"" + fileName + "\" successfully created!");
-                } else {
-                    infoBox("WARNING:\nWorld \"" + fileName + "\" already exists!");
-                }
+                saveWorldToFile();
             }
         }));
 
         uiManager.add(new UIImageButton(460, 385, 171, 57, Assets.gameButtonMenu, new ClickListener() {
             @Override
             public void onClick() {
-                //TODO: rework this prototype of switching window size!
-                handler.getMouseManager().setUIManager(null);
-                handler.getDisplay().getCanvas().setMaximumSize(new Dimension(baseWidth, baseHeight));
-                handler.getDisplay().getCanvas().setMinimumSize(new Dimension(baseWidth, baseHeight));
-                handler.getDisplay().getFrame().remove(fileNameInputField);
-                handler.getDisplay().getFrame().setMaximumSize(new Dimension(baseWidth, baseHeight));
-                handler.getDisplay().getFrame().setMinimumSize(new Dimension(baseWidth, baseHeight));
-                handler.getDisplay().getFrame().pack();
-                handler.getDisplay().getFrame().requestFocus();
-                handler.setState(new MenuState(handler));
+                returnToMenu();
             }
         }));
 
         addTileButtonsToUI();
 
+    }
+
+    private void saveWorldToFile() {
+        String nameInput = fileNameInputField.getText();
+        if (nameInput != null) {
+            fileName = nameInput;
+        }
+        List<String> world = worldEditor.worldToText();
+        if (Utils.saveStringToFile(world, fileName)) {
+            infoBox("World \"" + fileName + "\" successfully created!");
+        } else {
+            infoBox("WARNING:\nWorld \"" + fileName + "\" already exists!");
+        }
+    }
+
+    private void returnToMenu() {
+        handler.getMouseManager().setUIManager(null);
+        handler.getDisplay().getCanvas().setMaximumSize(new Dimension(baseWidth, baseHeight));
+        handler.getDisplay().getCanvas().setMinimumSize(new Dimension(baseWidth, baseHeight));
+        handler.getDisplay().getFrame().remove(fileNameInputField);
+        handler.getDisplay().getFrame().setMaximumSize(new Dimension(baseWidth, baseHeight));
+        handler.getDisplay().getFrame().setMinimumSize(new Dimension(baseWidth, baseHeight));
+        handler.getDisplay().getFrame().pack();
+        handler.getDisplay().getFrame().requestFocus();
+        handler.setState(new MenuState(handler));
     }
 
     private void addTileButtonsToUI() {
